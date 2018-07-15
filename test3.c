@@ -55,12 +55,14 @@ int main()
     int ret4 = Find(a, 4);
     int ret5 = Find(a, 6);
     int ret6 = Find(a, 8);
+    int ret7 = Find(NULL, 8);
     printf("expected is 1, actual is %d\n", ret1);
     printf("expected is 1, actual is %d\n", ret2);
     printf("expected is 1, actual is %d\n", ret3);
     printf("expected is 1, actual is %d\n", ret4);
     printf("expected is 1, actual is %d\n", ret5);
     printf("expected is -1, actual is %d\n", ret6);
+    printf("expected is -1, actual is %d\n", ret7);
 
     int a1[25] = {-3, -1, 0, 2, 5, 1, 3, 4, 5, 6, 2, 7, 9, 10, 12, 4, 9, 12, 13, 14, 6, 10, 15, 20, 25};
     ret1 = Find1(a1, 5, 5, 5);
@@ -69,11 +71,13 @@ int main()
     ret4 = Find1(a1, 5, 5, 4);
     ret5 = Find1(a1, 5, 5, 6);
     ret6 = Find1(a1, 5, 5, 8);
+    ret7 = Find1(NULL, 5, 5 ,8);
     printf("\nexpected is 1, actual is %d\n", ret1);
     printf("expected is 1, actual is %d\n", ret2);
     printf("expected is 1, actual is %d\n", ret3);
     printf("expected is 1, actual is %d\n", ret4);
     printf("expected is 1, actual is %d\n", ret5);
     printf("expected is -1, actual is %d\n", ret6);
+    printf("expected is -1, actual is %d\n", ret7);
     return 0;
 }
