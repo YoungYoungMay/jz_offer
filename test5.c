@@ -63,6 +63,7 @@ void LinklistReverse1(LinkNode** head)
         return;
     LinkNode* cur  = *head;
     //通过依次将首元素结点之后的节点头插实现
+    //也将链表只有一个结点的情况包含在下面
     while(cur->next != NULL)
     {
         LinkNode* nex = cur->next;
@@ -83,6 +84,7 @@ void LinklistReverse2(LinkNode* head)
     printf("%d ", head->data);
 }
 
+//输入的链表有多个结点
 void Test()
 {
     LinkNode* head;
@@ -99,9 +101,37 @@ void Test()
     LinklistReverse1(&head);
     PrintList(head);
 }
+//输入的链表有一个结点
+void Test1()
+{
+    LinkNode* head;
+    LinklistInit(&head);
+    LinklistPushFront(&head, 2);
+    PrintList(head);
+    LinklistReverse2(head);
+    printf("\n");
+    LinklistReverse1(&head);
+    PrintList(head);
+}
+
+//输入的链表头结点指针为NULL
+void Test2()
+{
+    LinkNode* head;
+    LinklistInit(&head);
+    LinklistPushFront(&head, 2);
+    LinklistPushFront(&head, 3);
+    PrintList(head);
+    LinklistReverse2(NULL);
+    printf("\n");
+    LinklistReverse1(NULL);
+    PrintList(NULL);
+}
 
 int main()
 {
     Test();
+    Test1();
+    Test2();
     return 0;
 }
