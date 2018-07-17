@@ -36,6 +36,30 @@ long long Fibonacci2(int n)
     return sum;
 }
 
+//青蛙跳台阶问题
+    //-》跳的方式类似斐波那且数列
+    //-》n=1有1种跳法，n=2有两种跳法，n=3有3种跳法，n=4有5种跳法，n=5有8种跳法...
+long long qingwa(int n)
+{
+    if(n <= 0)
+        return 0;
+    if(n == 1)
+        return 1;
+    if(n == 2)
+        return 2;
+    int preone = 2;
+    int pretwo = 1;
+    int sum = 0;
+    int i = 0;
+    for(i=3; i<=n; i++)
+    {
+        sum = preone + pretwo;
+        pretwo = preone;
+        preone = sum;
+    }
+    return sum;
+}
+
 void Test1()
 {
     long long res = Fibonacci1(5);
@@ -68,9 +92,26 @@ void Test2()
     printf("%lld\n", res5);
 }
 
+void Test()
+{
+    long long res = qingwa(-2);
+    printf("\n%lld\n", res);
+    long long res1 = qingwa(0);
+    printf("%lld\n", res1);
+    long long res2 = qingwa(1);
+    printf("%lld\n", res2);
+    long long res3 = qingwa(2);
+    printf("%lld\n", res3);
+    long long res4 = qingwa(5);
+    printf("%lld\n", res4);
+    long long res5 = qingwa(10);
+    printf("%lld\n", res5);
+}
+
 int main()
 {
     Test1();
     Test2();
+    Test();
     return 0;
 }
