@@ -2,6 +2,25 @@
     //->从矩阵的右上角开始，若大于key, 说明在当前列的左边,列--；
     //->若当前位置小于key, 说明在当前行的下面行++；
     //-》当前位置一定要保证是在当前行的最右边
+
+
+//bool Find(int target, vector<vector<int> > array) 
+//{
+//    int i = 0;
+//    int j = array[0].size()-1;
+//    while(i<array.size() && j>=0)
+//    {
+//        if(array[i][j] == target)
+//            return true;
+//        else if(array[i][j] > target)
+//            j--;
+//        else   
+//            i++;
+//    }
+//}
+
+
+
 #include <stdio.h>
 #define ROW 5
 #define COL 5
