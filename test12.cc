@@ -8,41 +8,43 @@
 #include <string.h>
 using namespace std;
 
-//字符串表示的数模拟加1
-bool Increment(char* num)//注意理解!!!
+
+//(1)解法1-》方法直观、但是代码较长
+    //假设要打印1~3位数的所有数，则我们设置一个4位数的字符串
+    //全部初始化为0，即看为整数的0
+    //然后每次加1，打印出来，直到最高位加到不是0就表示打印结束
+
+bool Increment(char* num)//注意理解!!!字符串表示的数模拟加1
 {
     bool isOverflow = false;
+    int ret = 0;//表示进位
     int len = strlen(num);
     int i = 0;
-    //字符串转化为整数
-    for(i=len-1; i>=0; i--)
-    {
-        num[i] = num[i] - '0';
-    }
     //计算+1的结果
-    num[len-1]++;
     for(i=len-1; i>=0; i--)
     {
-        if(num[i] >= 10)
+        int sum = num[i] - '0' +ret;//先将字符串转化为整数
+        if(i == len-1)
+            sum++;
+        if(sum >= 10)
         {
             //若在最高位进位，表示已经打印完了
             if(i == 0)
-            {
                 isOverflow = true;
-                num[i]--;
-            }
             else
             {
-                num[i] -= 10;
-                num[i-1] += 1;
+                sum -= 10;
+                ret = 1;
+                num[i] = '0' + sum;
             }
         }
         else
+        {
+            num[i] = '0' + sum;
             break;
+        }
     }
     //整数转化为字符串
-    for(i=0; i<len; i++)
-        num[i] = num[i] + '0';
     return isOverflow;
 }
 
@@ -54,7 +56,6 @@ void PrintNum(char* num)
     cout<<num+i<<" ";
 }
 
-//(1)解法1-》方法直观、但是代码较长
 void PrintToMaxOfNDigits(int n)
 {
     if(n <= 0)
@@ -64,6 +65,7 @@ void PrintToMaxOfNDigits(int n)
     memset(num, '0', n);
     num[n] = '\0';
 
+    //只要进位不到最后一个就继续打印
     while(!Increment(num))
     {
         PrintNum(num);
@@ -71,41 +73,13 @@ void PrintToMaxOfNDigits(int n)
     delete[] num;
 }
 
-//(2)解法2-》递归实现，代码简洁
-void PrintToMaxOfNDigitsRecursively1(char* num, int length, int index)
-{
-    if(index == length-1)
-    {
-        PrintNum(num);
-        return;
-    }
-    int i = 0;
-    for(; i<10; i++)
-    {
-        num[index+1] = i + '0';
-        PrintToMaxOfNDigitsRecursively1(num, length, index+1);
-    }
-}
+//(2)解法2-》递归实现，代码简洁??????
 
-void PrintToMaxOfNDigits1(int n)
-{
-    if(n <= 0)
-        return;
-    char* num = new char[n+1];
-    num[n] = '\0';
-    int i = 0;
-    for(; i<10; i++)
-    {
-        num[0] = i+'0';
-        PrintToMaxOfNDigitsRecursively1(num, n, 0);
-    }
-    delete[] num;
-}
 
 int main()
 {
     //负数、0、正数
-    PrintToMaxOfNDigits1(3);
+    PrintToMaxOfNDigits(2);
     cout<<endl;
     return 0;
 }
