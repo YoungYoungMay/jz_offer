@@ -2,6 +2,37 @@
 
 #include <stdio.h>
 
+//牛客网上解法
+void reOrderArray(vector<int> &array) 
+{
+    //传入的数组中只有1个元素，或者是空的，不用排序
+    if(array.size() <= 1)
+        return;
+    int i = 0;
+    //先将偶数保存起来
+    vector<int> ou;
+    for(; i<array.size(); ++i)
+    {
+        if(array[i]%2 == 0)
+            ou.push_back(array[i]);   
+    }
+    //再将奇数依次挪动，保证相对位置不变
+    int j = 0;
+    i = 0;
+    for(; i<array.size(); ++i)
+    {
+        if(array[i]%2 != 0)
+            array[j++] = array[i]; 
+    }
+    //再依次将偶数拿进来，保证偶数的相对位置
+    i = 0;
+    while(j<array.size())
+    {
+        array[j++] = ou[i++];                    
+    }
+}
+
+
 //解法1-》较简单
 void ReorderOddEven(int* data, unsigned int length)
 {
@@ -28,7 +59,7 @@ void ReorderOddEven(int* data, unsigned int length)
     //可复用，传入函数指针，控制调整条件
 int isEven(int n)//控制调整条件，可改变
 {
-    return (n&1)==0;
+    return (n&1)==0;//是偶数返回0，是奇数返回1
 }
 
 void ReorderOddEven1(int* data, unsigned int length, int (*func)(int))
