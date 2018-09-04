@@ -1,24 +1,22 @@
-//二叉树的镜像
-#include <iostream>
-using namespace std;
+//二叉树的镜像-》数据结构中的面试题
 
-struct BinaryTreeNode
-{
-    int val;
-    BinaryTreeNode* left;
-    BinaryTreeNode* right;
-};
 
-void TreeInit(BinaryTreeNode** root)
+void Mirror(TreeNode *pRoot) 
 {
-    if(root == NULL)
+    if(pRoot == NULL)
         return;
-    *root = NULL;
-    return;
-}
-
-int main()
-{
-
-    return 0;
+    queue<TreeNode*> q;
+    q.push(pRoot);
+    while(!q.empty())
+    {
+        TreeNode* cur = q.front();
+        TreeNode* tmp = cur->left;  
+        cur->left = cur->right;
+        cur->right = tmp;
+        if(cur->left != NULL)
+            q.push(cur->left)                   
+        if(cur->right != NULL)
+            q.push(cur->right);
+        q.pop();
+    }
 }
